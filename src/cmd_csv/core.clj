@@ -3,15 +3,6 @@
             [clojure.core.reducers :as r])
   (:gen-class))
 
-(defn my-split
-  [delimiter word]
-  (loop [i 0
-         words []]
-    (let [end (.indexOf word delimiter i)]
-      (if (= end -1)
-        (conj words (subs word i (count word)))
-        (recur (inc end) (conj words (subs word i end)))))))
-
 (defn update-in!
   [map v]
   (let [v1 (nth v 1)
