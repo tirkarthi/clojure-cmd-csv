@@ -23,11 +23,10 @@
           result (with-open [rdr (clojure.java.io/reader "sample.tsv")]
                    (doall
                     (->> (line-seq rdr)
-                         (r/map #(split %1 pattern))
-                         (r/reduce update-in! res-map)
+                         (map #(split %1 pattern))
+                         (reduce update-in! res-map)
                          persistent!)))]
       (if (empty? result)
         (println "No entries")
-        (let [max-key (apply max-key #(second %1) result)
-              max-value (get result max-key)]
+        (let [[max-key max-value] (apply max-key #(second %1) result)]
           (println "max_key: " max-key " sum: " max-value)))))))
