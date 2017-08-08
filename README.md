@@ -1,36 +1,17 @@
 # cmd-csv
 
-FIXME: description
-
-## Installation
-
-Download from http://example.com/FIXME.
+A simple TSV/CSV utility to process files and for benchmarking
 
 ## Usage
 
-FIXME: explanation
-
-    $ java -jar cmd-csv-0.1.0-standalone.jar [args]
-
-## Options
-
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
+    $ wget -O data.gz https://storage.googleapis.com/books/ngrams/books/googlebooks-eng-all-1gram-20120701-0.gz
+    $ gunzip -c data.gz > sample.tsv
+    $ lein install
+    $ lein uberjar
+    $ java -jar cmd-csv-0.1.0-standalone.jar
 
 ## License
 
-Copyright © 2017 FIXME
+Copyright © 2017 Karthikeyan S
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+Distributed under the MIT License
