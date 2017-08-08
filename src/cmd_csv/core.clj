@@ -16,17 +16,15 @@
 
 (defn -main
   []
-  (dotimes [i 3]
-    (time
-     (let [pattern (re-pattern #"\t")
-          res-map (transient {})
-          result (with-open [rdr (clojure.java.io/reader "sample.tsv")]
-                   (doall
-                    (->> (line-seq rdr)
-                         (map #(split %1 pattern))
-                         (reduce update-in! res-map)
-                         persistent!)))]
-      (if (empty? result)
-        (println "No entries")
-        (let [[max-key max-value] (apply max-key #(second %1) result)]
-          (println "max_key: " max-key " sum: " max-value)))))))
+  (let [pattern (re-pattern #"\t")
+        res-map (transient {})
+        result (with-open [rdr (clojure.java.io/reader "sample.tsv")]
+                 (doall
+                  (->> (line-seq rdr)
+                       (r/map #(split %1 pattern))
+                       (r/reduce update-in! res-map)
+                       persistent!)))]
+    (if (empty? result)
+      (println "No entries")
+      (let [[max-key max-value] (apply max-key #(second %1) result)]
+        (println "max_key: " max-key " sum: " max-value)))))
